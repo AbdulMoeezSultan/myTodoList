@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import NavBar from "./components/layout/navBar";
+import NavBar from "./components/layout/navbar";
 import Task from "./Types/Task";
-import TodoList from "./components/section/todoList/TodoList";
+import TodoList from "./components/section/todo-list/Todo-list";
 
 function App() {
   const [listTasks, setListTasks] = useState<Task[]>([]);

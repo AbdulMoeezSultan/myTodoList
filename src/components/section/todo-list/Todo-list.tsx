@@ -32,7 +32,7 @@ const TodoList = ({ listTasks, setListTasks }: PropsType) => {
               className="flex justify-between items-center lg:w-[45%] border border-white p-5 text-3xl rounded-xl"
               key={index}
             >
-              <div className="mr-10 lg:mr-7 text-justify">{t.MyTask}</div>
+              <div className={`mr-10 lg:mr-7 text-justify ${t.Status ? "line-through" : "no-underline"}`}>{t.MyTask}</div>
               <div className="flex gap-5 justify-center items-center">
                 <div className="flex ">
                   <label htmlFor={`status${index}`} className="sr-only">

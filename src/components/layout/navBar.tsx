@@ -1,19 +1,13 @@
 import { useState } from "react";
 import Task from "../../Types/Task";
-import TodoInput from "../section/todoList/todoInput";
+import TodoInput from "../section/todo-list/todo-input";
+import PrimaryButton from "../ui/button/primary-button";
 
 const NavBar = ({setListTasks}: PropsType) => {
   const [toggler, setToggler] = useState(false);
   return (
     <div className="border-b-2 border-white p-2 flex justify-end mb-10">
-      <button
-        className=" border p-2 rounded-3xl SecondaryColor text-lg w-32"
-        onClick={() => {  
-          setToggler(!toggler);
-        }}
-      >
-        Create Task
-      </button>
+      <PrimaryButton Name={"Create Task"} Function={() => setToggler(!toggler)}/>
       {toggler && (
         <div
           className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
@@ -41,7 +35,7 @@ const NavBar = ({setListTasks}: PropsType) => {
                 </button>
               </div>
 
-              <TodoInput setListTasks={setListTasks} />
+              <TodoInput setListTasks={setListTasks} setToggler={setToggler} />
             </div>
           </div>
         </div>

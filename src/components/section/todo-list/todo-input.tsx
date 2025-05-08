@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Task from "../../../Types/Task";
-
-const TodoInput = ({ setListTasks }: PropsType) => {
+import PrimaryButton from "../../ui/button/primary-button";
+const TodoInput = ({ setListTasks, setToggler }: PropsType) => {
   const [task, setTask] = useState("");
   const [status, setStatus] = useState(false);
 
-  const handleSubmit = async () => {
+  const AddTask = () => {
     if (task) {
       const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
       tasks.push({ MyTask: task, Status: status });
@@ -13,6 +13,7 @@ const TodoInput = ({ setListTasks }: PropsType) => {
       setListTasks((prev) => [...prev, { MyTask: task, Status: status }]);
       setTask("");
       setStatus(false);
+      setToggler(false);
     } else {
       console.log("Task field empty");
     }
@@ -46,12 +47,7 @@ const TodoInput = ({ setListTasks }: PropsType) => {
         />
       </div>
       <div className="flex justify-center">
-        <button
-          className="SecondaryColor w-32 rounded-3xl border p-2 text-xl"
-          onClick={handleSubmit}
-        >
-          Add Task
-        </button>
+        <PrimaryButton Name={"Add Task"} Function={AddTask}/>
       </div>
     </div>
   );
@@ -59,6 +55,7 @@ const TodoInput = ({ setListTasks }: PropsType) => {
 
 type PropsType = {
   setListTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  setToggler: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default TodoInput;
