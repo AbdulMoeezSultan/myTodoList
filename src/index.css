@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.PrimaryColor {
+  background-color: black;
+}
+.SecondaryColor {
+  background-color: #9796967c;
+}
+
+.PrimaryFontColor {
+  color: #ffffff;
+}
