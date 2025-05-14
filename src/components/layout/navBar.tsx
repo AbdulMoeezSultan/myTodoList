@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import TodoInput from '../section/ToDoList/ToDoInput'
 import PrimaryButton from '../ui/Button/PrimaryButton'
 import { Action } from '../../Reducers/TaskReducer'

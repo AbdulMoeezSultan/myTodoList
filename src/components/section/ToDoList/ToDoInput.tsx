@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Task from '../../../Types/Task'
 import PrimaryButton from '../../ui/Button/PrimaryButton'
 import { Action } from '../../../Reducers/TaskReducer'
