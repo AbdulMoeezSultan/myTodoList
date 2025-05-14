@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react'
 import { taskReducer } from './Reducers/TaskReducer'
-import NavBar from './components/layout/NavBar'
+import NavBar  from './components/layout/navBar'
 import Task from './Types/Task'
 import TodoList from './components/section/ToDoList/ToDoList'
 
