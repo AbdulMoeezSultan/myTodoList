@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from 'react'
 import { taskReducer } from './Reducers/TaskReducer'
-import Navbar from './Componentsed/Layout/Navbar'
+import Navbar from './Components/Layout/Navbar'
 import Task from './Types/Task'
-import TodoList from './Componentsed/Section/ToDoList/ToDoList'
+import TodoList from './Components/Section/ToDoList/ToDoList'
 
 function App() {
   const [tasks, dispatch] = useReducer(taskReducer, [])
