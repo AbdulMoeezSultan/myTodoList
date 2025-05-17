@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from 'react'
 import { taskReducer } from './Reducers/TaskReducer'
-import NavBar  from './components/layout/navBar'
+import Navbar from './Components/Layout/Navbar'
 import Task from './Types/Task'
-import TodoList from './components/section/ToDoList/ToDoList'
+import TodoList from './Components/Section/ToDoList/ToDoList'
 
 function App() {
   const [tasks, dispatch] = useReducer(taskReducer, [])
@@ -12,12 +12,12 @@ function App() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+    if (tasks.length > 0) localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
   return (
     <div className="min-h-screen pl-5 pr-5 pt-2 PrimaryColor PrimaryFontColor">
-      <NavBar dispatch={dispatch} />
+      <Navbar dispatch={dispatch} />
       <TodoList tasks={tasks} dispatch={dispatch} />
     </div>
   )

@@ -1,17 +1,17 @@
-const PrimaryButton = ({ Name, Function }: PropsType) => {
+const PrimaryButton = ({ name, myFunction }: PropsType) => {
   return (
     <button
       className=" border p-2 rounded-3xl SecondaryColor text-lg w-32"
-      onClick={Function}
+      onClick={myFunction}
     >
-      {Name}
+      {name}
     </button>
   );
 };
 
 type PropsType = {
-  Name: string;
-  Function: () => void;
+  name: string;
+  myFunction: () => void;
 };
 
 export default PrimaryButton;

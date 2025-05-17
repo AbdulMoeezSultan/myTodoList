@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import TodoInput from '../section/ToDoList/ToDoInput'
-import PrimaryButton from '../ui/Button/PrimaryButton'
+import TodoInput from '../Section/ToDoList/ToDoInput'
+import PrimaryButton from '../Ui/Button/PrimaryButton'
 import { Action } from '../../Reducers/TaskReducer'
 
 type props = {
   dispatch: React.Dispatch<Action>
 }
 
-const NavBar = ({ dispatch }: props) => {
+const Navbar = ({ dispatch }: props) => {
   const [toggler, setToggler] = useState(false)
   return (
     <div className="border-b-2 border-white p-2 flex justify-end mb-10">
       <PrimaryButton
-        Name={'Create Task'}
-        Function={() => setToggler(!toggler)}
+        name={'Create Task'}
+        myFunction={() => setToggler(!toggler)}
       />
       {toggler && (
         <div
@@ -23,7 +23,7 @@ const NavBar = ({ dispatch }: props) => {
           }}
         >
           <div
-            className="relative SecondaryColor p-4 w-full max-w-md max-h-full rounded-xl"
+            className="relative bg-[#9796967c] p-4 w-full max-w-md max-h-full rounded-xl"
             onClick={(e) => {
               e.stopPropagation()
             }}
@@ -33,7 +33,7 @@ const NavBar = ({ dispatch }: props) => {
                 <h3 className="text-3xl PrimaryFontColor">Create Task</h3>
                 <button
                   type="button"
-                  className="end-2.5 bg-transparent rounded-lg text-3xl font-medium w-8 h-8 ms-auto inline-flex justify-center items-center"
+                  className="end-2.5 rounded-lg text-3xl font-medium w-8 h-8 ms-auto inline-flex justify-center items-center"
                   onClick={() => {
                     setToggler(!toggler)
                   }}
@@ -51,4 +51,4 @@ const NavBar = ({ dispatch }: props) => {
   )
 }
 
-export default NavBar
+export default Navbar

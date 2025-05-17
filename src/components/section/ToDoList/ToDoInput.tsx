@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Task from '../../../Types/Task'
-import PrimaryButton from '../../ui/Button/PrimaryButton'
+import PrimaryButton from '../../Ui/Button/PrimaryButton'
 import { Action } from '../../../Reducers/TaskReducer'
 
 type PropsType = {
@@ -9,12 +9,12 @@ type PropsType = {
 }
 
 const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
-  const [newTask, setNewTask] = useState<Task>({MyTask: "", Status: false})
+  const [newTask, setNewTask] = useState<Task>({ myTask: '', status: false })
 
-  const AddTask = () => {
-    if (newTask?.MyTask) {
+  const addTask = () => {
+    if (newTask?.myTask) {
       dispatch({ type: 'ADD_TASK', payload: newTask })
-      setNewTask({MyTask: "", Status: false})
+      setNewTask({ myTask: '', status: false })
       setToggler(false)
     } else {
       console.log('Task field empty')
@@ -30,8 +30,8 @@ const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
         id="task"
         className="h-28 rounded-xl p-1 SecondaryColor placeholder-white placeholder: text-xl"
         placeholder="Task Description"
-        onChange={(e) => setNewTask({...newTask, MyTask: e.target.value})}
-        value={newTask?.MyTask}
+        onChange={(e) => setNewTask({ ...newTask, myTask: e.target.value })}
+        value={newTask?.myTask}
         required
       />
       <div className="flex gap-6 ">
@@ -42,14 +42,14 @@ const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
           id="status"
           className="w-6 SecondaryColor"
           type="checkbox"
-          checked={newTask?.Status}
+          checked={newTask?.status}
           onChange={(e) => {
-            setNewTask({...newTask, Status:e.target.checked})
+            setNewTask({ ...newTask, status: e.target.checked })
           }}
         />
       </div>
       <div className="flex justify-center">
-        <PrimaryButton Name={'Add Task'} Function={AddTask} />
+        <PrimaryButton name={'Add Task'} myFunction={addTask} />
       </div>
     </div>
   )

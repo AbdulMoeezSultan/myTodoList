@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faPenFancy } from '@fortawesome/free-solid-svg-icons'
 import Task from '../../../Types/Task'
 import NoTasks from '../../../assets/NoTasks.webp'
 import { Action } from '../../../Reducers/TaskReducer'
@@ -10,29 +11,59 @@ type PropsType = {
 }
 
 const ToDoList = ({ tasks, dispatch }: PropsType) => {
-  const UpdateStatus = (Index: number) => {
-    dispatch({ type: 'TOGGLE_TASK', index: Index })
+  const [isUpdating, setIsUpdating] = useState<number | null>(null)
+  const updateStatus = (taskIndex: number) => {
+    dispatch({ type: 'TOGGLE_TASK', index: taskIndex })
   }
 
-  const DeleteTask = (Index: number) => {
-    dispatch({ type: 'DELETE_TASK', index: Index })
+  const updateTask = (taskIndex: number) => {
+    return isUpdating !== taskIndex
+      ? setIsUpdating(taskIndex)
+      : setIsUpdating(null)
+  }
+
+  const deleteTask = (taskIndex: number) => {
+    dispatch({ type: 'DELETE_TASK', index: taskIndex })
   }
 
   return (
     <div className="min-h-screen">
       {tasks.length > 0 ? (
-        <div className="flex flex-col flex-wrap lg:flex-row gap-5 justify-center">
+        <div className="flex flex-col flex-wrap gap-5 justify-center items-center">
           {tasks.map((t, index) => (
             <div
-              className="flex justify-between items-center lg:w-[45%] border border-white p-5 text-3xl rounded-xl"
+              className="flex justify-between items-center w-[95%] lg:w-[75%] border border-white p-5 text-3xl rounded-xl"
               key={index}
             >
               <div
-                className={`mr-10 lg:mr-7 text-justify ${t.Status ? 'line-through' : 'no-underline'}`}
+                className={`mr-10 lg:mr-7 text-justify ${t.status ? 'line-through' : 'no-underline'}`}
               >
-                {t.MyTask}
+                {isUpdating !== index ? (
+                  t.myTask
+                ) : (
+                  <>
+                    <label htmlFor={`update${index}`} className="sr-only">
+                      Update Task
+                    </label>
+                    <input
+                      type="input"
+                      id={`update${index}`}
+                      className="SecondaryColor rounded-2xl pl-2 p-1"
+                      value={t.myTask}
+                      onChange={(e) => {
+                        dispatch({
+                          type: 'UPDATE_TASK',
+                          payload: {
+                            index,
+                            task: { myTask: e.target.value, status: t.status },
+                          },
+                        })
+                      }}
+                    />
+                  </>
+                )}
               </div>
-              <div className="flex gap-5 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
                 <div className="flex ">
                   <label htmlFor={`status${index}`} className="sr-only">
                     Status
@@ -40,9 +71,9 @@ const ToDoList = ({ tasks, dispatch }: PropsType) => {
                   <input
                     type="checkbox"
                     id={`status${index}`}
-                    checked={t.Status}
+                    checked={t.status}
                     onChange={() => {
-                      UpdateStatus(index)
+                      updateStatus(index)
                     }}
                     className="size-8"
                   />
@@ -50,7 +81,15 @@ const ToDoList = ({ tasks, dispatch }: PropsType) => {
                 <div
                   className="cursor-pointer no-underline"
                   onClick={() => {
-                    DeleteTask(index)
+                    updateTask(index)
+                  }}
+                >
+                  <FontAwesomeIcon icon={faPenFancy} />
+                </div>
+                <div
+                  className="cursor-pointer no-underline"
+                  onClick={() => {
+                    deleteTask(index)
                   }}
                 >
                   <FontAwesomeIcon icon={faTrashCan} />
