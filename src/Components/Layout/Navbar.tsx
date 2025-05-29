@@ -30,7 +30,7 @@ const Navbar = ({ dispatch }: props) => {
           >
             <div className="relative rounded-lg shadow-sm">
               <div className="flex items-center justify-between p-4 md:p-5">
-                <h3 className="text-3xl PrimaryFontColor">Create Task</h3>
+                <h3 className="text-3xl text-primaryfont">Create Task</h3>
                 <button
                   type="button"
                   className="end-2.5 rounded-lg text-3xl font-medium w-8 h-8 ms-auto inline-flex justify-center items-center"

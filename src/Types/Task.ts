@@ -1,6 +1,6 @@
 type Task = {
-  myTask: string;
-  status: boolean;
-};
+  myTask: string
+  status: boolean
+}
 
-export default Task;
+export default Task

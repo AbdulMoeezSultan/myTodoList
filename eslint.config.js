@@ -1,6 +1,6 @@
 import tseslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
-import prettier from 'eslint-config-prettier'
+import { default as pluginPrettierRecommended } from 'eslint-plugin-prettier/recommended'
 import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
@@ -13,7 +13,7 @@ export default defineConfig([
       ...pluginReact.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      'quotes': ['error', 'single', { avoidEscape: true }],
+      quotes: ['error', 'single', { avoidEscape: true }],
     },
     settings: {
       react: {
@@ -24,8 +24,5 @@ export default defineConfig([
 
   ...tseslint.configs.recommended,
 
-  {
-    name: 'prettier',
-    rules: prettier.rules,
-  },
+  pluginPrettierRecommended,
 ])

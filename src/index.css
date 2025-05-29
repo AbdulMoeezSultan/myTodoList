@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.PrimaryColor {
-  background-color: black;
+:root {
+  --primary: black;
+  --secondary: #9796967c;
+  --primaryfont: white;
 }
-.SecondaryColor {
-  background-color: #9796967c;
-}
-
-.PrimaryFontColor {
-  color: #ffffff;
+.dark {
+  --primary: black;
+  --secondary: #9796967c;
 }

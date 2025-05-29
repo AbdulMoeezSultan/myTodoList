@@ -28,7 +28,7 @@ const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
       </label>
       <textarea
         id="task"
-        className="h-28 rounded-xl p-1 SecondaryColor placeholder-white placeholder: text-xl"
+        className="h-28 rounded-xl p-1 bg-secondary placeholder-white placeholder: text-xl"
         placeholder="Task Description"
         onChange={(e) => setNewTask({ ...newTask, myTask: e.target.value })}
         value={newTask?.myTask}
@@ -40,7 +40,7 @@ const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
         </label>
         <input
           id="status"
-          className="w-6 SecondaryColor"
+          className="w-6 bg-secondary"
           type="checkbox"
           checked={newTask?.status}
           onChange={(e) => {
