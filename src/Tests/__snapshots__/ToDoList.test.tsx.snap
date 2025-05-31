@@ -216,6 +216,100 @@ exports[`ToDoList component displays a loading spinner initially 1`] = `
 </div>
 `;
 
+exports[`ToDoList component enable task to get update 1`] = `
+<div>
+  <div
+    class="min-h-screen"
+  >
+    <div
+      class="flex flex-col flex-wrap gap-5 justify-center items-center"
+    >
+      <div
+        class="flex justify-between items-center w-[95%] lg:w-[75%] border border-white p-5 text-3xl rounded-xl"
+      >
+        <div
+          class="mr-10 lg:mr-7 text-justify w-full no-underline"
+        >
+          <label
+            class="sr-only"
+            for="update0"
+          >
+            Update Task
+          </label>
+          <input
+            class="bg-secondary rounded-2xl pl-2 p-1 w-[100%]"
+            id="update0"
+            type="input"
+            value="Go for a walk"
+          />
+        </div>
+        <div
+          class="flex flex-col sm:flex-row gap-5 justify-center items-center"
+        >
+          <div
+            class="flex "
+          >
+            <label
+              class="sr-only"
+              for="status0"
+            >
+              Status
+            </label>
+            <input
+              class="size-8"
+              id="status0"
+              type="checkbox"
+            />
+          </div>
+          <div
+            aria-label="Task Update"
+            class="cursor-pointer no-underline"
+            role="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-pen-fancy "
+              data-icon="pen-fancy"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M373.5 27.1C388.5 9.9 410.2 0 433 0c43.6 0 79 35.4 79 79c0 22.8-9.9 44.6-27.1 59.6L277.7 319l-10.3-10.3-64-64L193 234.3 373.5 27.1zM170.3 256.9l10.4 10.4 64 64 10.4 10.4-19.2 83.4c-3.9 17.1-16.9 30.7-33.8 35.4L24.3 510.3l95.4-95.4c2.6 .7 5.4 1.1 8.3 1.1c17.7 0 32-14.3 32-32s-14.3-32-32-32s-32 14.3-32 32c0 2.9 .4 5.6 1.1 8.3L1.7 487.6 51.5 310c4.7-16.9 18.3-29.9 35.4-33.8l83.4-19.2z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <div
+            aria-label="Task Delete"
+            class="cursor-pointer no-underline"
+            role="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-trash-can "
+              data-icon="trash-can"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`ToDoList component matches snapshot when tasks are empty 1`] = `
 <div>
   <div
