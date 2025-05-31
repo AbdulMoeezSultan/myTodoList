@@ -1,12 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import ToDoInput from './ToDoInput'
+import ToDoInput from '../Components/Section/ToDoList/ToDoInput'
 
 type PrimaryButtonProps = {
   name: string
   myFunction: () => void
 }
 
-jest.mock('../../Ui/Button/PrimaryButton', () => {
+jest.mock('../Components/Ui/Button/PrimaryButton', () => {
   const MockPrimaryButton = ({ name, myFunction }: PrimaryButtonProps) => (
     <button onClick={myFunction}>{name}</button>
   )
@@ -18,6 +18,13 @@ const mockDispatch = jest.fn()
 const mockSetToggler = jest.fn()
 
 describe('ToDoInput Component', () => {
+  test('matches snapshot', () => {
+    const { asFragment } = render(
+      <ToDoInput dispatch={mockDispatch} setToggler={mockSetToggler} />,
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
   beforeEach(() => {
     render(<ToDoInput dispatch={mockDispatch} setToggler={mockSetToggler} />)
   })
@@ -50,6 +57,21 @@ describe('ToDoInput Component', () => {
   test('does not dispatch if input is empty', () => {
     const addButton = screen.getByRole('button', { name: /Add Task/i })
     fireEvent.click(addButton)
+    expect(mockDispatch).not.toHaveBeenCalled()
+    expect(mockSetToggler).not.toHaveBeenCalled()
+  })
+
+  test('does not dispatch if task already exist', () => {
+    const existingTasks = [{ myTask: 'Test Task', status: false }]
+    localStorage.setItem('tasks', JSON.stringify(existingTasks))
+    const textarea = screen.getByPlaceholderText(/Task Description/i)
+    const checkbox = screen.getByLabelText(/Status:/i)
+    const addButton = screen.getByRole('button', { name: /Add Task/i })
+
+    fireEvent.change(textarea, { target: { value: 'Test Task' } })
+    fireEvent.click(checkbox)
+    fireEvent.click(addButton)
+
     expect(mockDispatch).not.toHaveBeenCalled()
     expect(mockSetToggler).not.toHaveBeenCalled()
   })

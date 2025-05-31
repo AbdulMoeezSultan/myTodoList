@@ -1,6 +1,6 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import ToDoList from './ToDoList'
-import Task from '../../../Types/Task'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
+import ToDoList from '../Components/Section/ToDoList/ToDoList'
+import Task from '../Types/Task'
 
 jest.useFakeTimers()
 const mockDispatch = jest.fn()
@@ -10,18 +10,26 @@ describe('ToDoList component', () => {
     mockDispatch.mockClear()
     localStorage.clear()
   })
+
   it('displays a loading spinner initially', () => {
-    render(<ToDoList tasks={[]} dispatch={mockDispatch} />)
+    const { container } = render(
+      <ToDoList tasks={[]} dispatch={mockDispatch} />,
+    )
     expect(screen.getByRole('status')).toBeInTheDocument()
     expect(screen.getByText(/Fetching Data/)).toBeInTheDocument()
+    expect(container).toMatchSnapshot()
   })
 
   it('dispatches SET_TASK action after 5 seconds', async () => {
     const mockTasks: Task[] = [{ myTask: 'Test', status: false }]
     localStorage.setItem('tasks', JSON.stringify(mockTasks))
 
-    render(<ToDoList tasks={[]} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={[]} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(mockDispatch).toHaveBeenCalledWith({
@@ -29,31 +37,46 @@ describe('ToDoList component', () => {
         payload: mockTasks,
       })
     })
+    expect(container).toMatchSnapshot()
   })
 
   it('shows "No Tasks" image when tasks are empty and loading is false', async () => {
-    render(<ToDoList tasks={[]} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={[]} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(screen.getByAltText(/No Tasks to do/)).toBeInTheDocument()
     })
+    expect(container).toMatchSnapshot()
   })
 
   it('render tasks when passed as props', async () => {
     const tasks = [{ myTask: 'Go for a walk', status: false }]
-    render(<ToDoList tasks={tasks} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={tasks} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Go for a walk')).toBeInTheDocument()
     })
+    expect(container).toMatchSnapshot()
   })
 
   it('dispatche TOGGLE_TASK when checkbox is clicked', async () => {
     const tasks = [{ myTask: 'Go for a walk', status: false }]
-    render(<ToDoList tasks={tasks} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={tasks} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Go for a walk')).toBeInTheDocument()
@@ -66,12 +89,17 @@ describe('ToDoList component', () => {
       type: 'TOGGLE_TASK',
       index: 0,
     })
+    expect(container).toMatchSnapshot()
   })
 
   it('dispatche DELETE_TASK when trash icon is clicked', async () => {
     const tasks = [{ myTask: 'Go for a walk', status: false }]
-    render(<ToDoList tasks={tasks} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={tasks} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Go for a walk')).toBeInTheDocument()
@@ -81,13 +109,18 @@ describe('ToDoList component', () => {
     fireEvent.click(trashButton)
 
     expect(mockDispatch).toHaveBeenCalledWith({ type: 'DELETE_TASK', index: 0 })
+    expect(container).toMatchSnapshot()
   })
 
   it('enable task to get update', async () => {
     const tasks = [{ myTask: 'Go for a walk', status: false }]
     const mockDispatch = jest.fn()
-    render(<ToDoList tasks={tasks} dispatch={mockDispatch} />)
-    jest.advanceTimersByTime(5000)
+    const { container } = render(
+      <ToDoList tasks={tasks} dispatch={mockDispatch} />,
+    )
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Go for a walk')).toBeInTheDocument()
@@ -112,5 +145,6 @@ describe('ToDoList component', () => {
         },
       },
     })
+    expect(container).toMatchSnapshot()
   })
 })

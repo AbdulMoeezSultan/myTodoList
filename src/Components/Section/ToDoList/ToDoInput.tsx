@@ -10,15 +10,28 @@ type PropsType = {
 
 const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
   const [newTask, setNewTask] = useState<Task>({ myTask: '', status: false })
+  const [inputError, setInputError] = useState({ message: '', status: false })
 
   const addTask = () => {
-    if (newTask?.myTask) {
-      dispatch({ type: 'ADD_TASK', payload: newTask })
-      setNewTask({ myTask: '', status: false })
-      setToggler(false)
-    } else {
-      console.log('Task field empty')
+    const trimmedInput = newTask.myTask.trim()
+    if (!trimmedInput) {
+      console.log('Task is empty after trimming')
+      setInputError({ message: 'Task field empty', status: true })
+      return
     }
+    const savedTasks: Task[] = JSON.parse(localStorage.getItem('tasks') || '[]')
+    const isDuplicate = savedTasks.some(
+      (task) => task.myTask.trim().toLowerCase() === trimmedInput.toLowerCase(),
+    )
+    if (isDuplicate) {
+      console.log('Task is already in the list')
+      setInputError({ message: 'Task already exist', status: true })
+      return
+    }
+    dispatch({ type: 'ADD_TASK', payload: newTask })
+    setNewTask({ myTask: '', status: false })
+    setInputError({ message: '', status: false })
+    setToggler(false)
   }
 
   return (
@@ -34,6 +47,9 @@ const ToDoInput = ({ dispatch, setToggler }: PropsType) => {
         value={newTask?.myTask}
         required
       />
+      {inputError.status === true && (
+        <p className="text-black font-bold text-xl">* {inputError.message}</p>
+      )}
       <div className="flex gap-6 ">
         <label htmlFor="status" className="text-2xl">
           Status:

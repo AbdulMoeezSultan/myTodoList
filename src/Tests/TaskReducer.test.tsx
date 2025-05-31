@@ -1,4 +1,4 @@
-import { taskReducer, Action } from './TaskReducer'
+import { taskReducer, Action } from '../Reducers/TaskReducer'
 import Task from '../Types/Task'
 
 const initialTasks: Task[] = [
