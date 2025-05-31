@@ -48,4 +48,11 @@ describe('taskReducer', () => {
     expect(result).toHaveLength(1)
     expect(result[0].myTask).toBe('Task 1')
   })
+
+  test('Fake_Task_Action', () => {
+    const action: Action = { type: 'HEHE_TASK', index: 1 } as unknown as Action
+
+    const result = taskReducer(initialTasks, action)
+    expect(result).toBe(initialTasks)
+  })
 })

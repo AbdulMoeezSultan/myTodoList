@@ -147,4 +147,31 @@ describe('ToDoList component', () => {
     })
     expect(container).toMatchSnapshot()
   })
+
+  it('disable the update button when clicking edit icon again', async () => {
+    const tasks = [{ myTask: 'Go for a walk', status: false }]
+    const mockDispatch = jest.fn()
+    render(<ToDoList tasks={tasks} dispatch={mockDispatch} />)
+
+    act(() => {
+      jest.advanceTimersByTime(5000)
+    })
+
+    await waitFor(() => {
+      expect(screen.getByText('Go for a walk')).toBeInTheDocument()
+    })
+
+    const editButton = screen.getByRole('button', { name: 'Task Update' })
+    fireEvent.click(editButton)
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('Update Task')).toBeInTheDocument()
+    })
+
+    fireEvent.click(editButton)
+
+    await waitFor(() => {
+      expect(screen.queryByLabelText('Update Task')).not.toBeInTheDocument()
+    })
+  })
 })
