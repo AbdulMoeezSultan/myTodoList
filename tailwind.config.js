@@ -7,6 +7,7 @@ export default {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         primaryfont: 'var(--primaryfont)',
+        bordercolor: 'var(--bordercolor)',
       },
     },
   },

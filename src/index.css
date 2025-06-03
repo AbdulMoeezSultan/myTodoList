@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: black;
-  --secondary: #9796967c;
-  --primaryfont: white;
+@layer base {
+  :root {
+    --primary: #f5f3ef;
+    --secondary: #d6cfc4;
+    --primaryfont: #3e3e3e;
+    --bordercolor: #b6b0a9;
+  }
 }
-.dark {
-  --primary: black;
-  --secondary: #9796967c;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #1c1c1c;
+    --secondary: #3a3a3a;
+    --primaryfont: #f5f5f5;
+    --bordercolor: #5a5a5a;
+  }
 }

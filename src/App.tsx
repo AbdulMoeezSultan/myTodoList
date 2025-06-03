@@ -1,15 +1,10 @@
-import { useEffect, useReducer, lazy, Suspense } from 'react'
-import { taskReducer } from './Reducers/TaskReducer'
+import { lazy, Suspense } from 'react'
+import useTasks from './Hooks/useTaskUpdate'
 import Navbar from './Components/Layout/Navbar'
 const TodoList = lazy(() => import('./Components/Section/ToDoList/ToDoList'))
 
 function App() {
-  const [tasks, dispatch] = useReducer(taskReducer, [])
-
-  useEffect(() => {
-    if (tasks.length > 0) localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
-
+  const { tasks, dispatch } = useTasks()
   return (
     <div className="min-h-screen bg-primary pl-5 pr-5 pt-2 text-primaryfont">
       <Navbar dispatch={dispatch} />

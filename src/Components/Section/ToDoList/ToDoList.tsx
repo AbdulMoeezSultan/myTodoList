@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useSetTask from '../../../Hooks/useSetTask'
 import { faTrashCan, faPenFancy } from '@fortawesome/free-solid-svg-icons'
 import Task from '../../../Types/Task'
 import NoTasks from '../../../assets/NoTasks.webp'
@@ -11,20 +11,7 @@ type PropsType = {
 }
 
 const ToDoList = ({ tasks, dispatch }: PropsType) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [isUpdating, setIsUpdating] = useState<number | null>(null)
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const savedTasks: Task[] = JSON.parse(
-        localStorage.getItem('tasks') || '[]',
-      )
-      dispatch({ type: 'SET_TASK', payload: savedTasks })
-      setIsLoading(false)
-    }, 5000)
-
-    return () => clearTimeout(timeoutId)
-  }, [])
+  const { isLoading, isUpdating, setIsUpdating } = useSetTask(dispatch)
 
   const updateStatus = (taskIndex: number) => {
     dispatch({ type: 'TOGGLE_TASK', index: taskIndex })
@@ -71,7 +58,7 @@ const ToDoList = ({ tasks, dispatch }: PropsType) => {
             <div className="flex flex-col flex-wrap gap-5 justify-center items-center">
               {tasks.map((t, index) => (
                 <div
-                  className="flex justify-between items-center w-[95%] lg:w-[75%] border border-white p-5 text-3xl rounded-xl"
+                  className="flex justify-between items-center w-[95%] lg:w-[75%] border border-bordercolor p-5 text-3xl rounded-xl"
                   key={index}
                 >
                   <div

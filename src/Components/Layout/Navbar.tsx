@@ -10,7 +10,7 @@ type props = {
 const Navbar = ({ dispatch }: props) => {
   const [toggler, setToggler] = useState(false)
   return (
-    <div className="border-b-2 border-white p-2 flex justify-end mb-10">
+    <div className="border-b-2 border-bordercolor p-2 flex justify-end mb-10">
       <PrimaryButton
         name={'Create Task'}
         myFunction={() => setToggler(!toggler)}
