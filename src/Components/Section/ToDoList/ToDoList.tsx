@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faPenFancy } from '@fortawesome/free-solid-svg-icons'
 import Task from '../../../Types/Task'
-import NoTasks from '../../../assets/NoTasks.webp'
+import NoTasks from '../../../Assets/NoTasks.webp'
 import { Action } from '../../../Reducers/TaskReducer'
 
 type PropsType = {
