@@ -62,7 +62,7 @@ const ToDoList = ({ tasks, dispatch }: PropsType) => {
                   key={index}
                 >
                   <div
-                    className={`mr-10 lg:mr-7 text-justify w-full ${t.status ? 'line-through' : 'no-underline'}`}
+                    className={`mr-10 lg:mr-7 text-justify break-all ${t.status ? 'line-through' : 'no-underline'}`}
                   >
                     {isUpdating !== index ? (
                       t.myTask
